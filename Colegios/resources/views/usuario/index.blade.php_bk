@@ -1,0 +1,39 @@
+@extends('admin.template')
+
+
+
+@section('content')
+@include('usuario.menu.menu')
+<h2>Listado de usuarios</h2>
+{!!$usuario->render()!!}
+<table class="table">
+    <thead>
+        <th>Usuario</th>
+        <th>email</th>
+        <th>Tipo de usuario</th>
+        <th>Estado</th>
+        <th>Acción</th>
+    </thead>
+    <tbody>
+        @foreach($usuario as $row)
+        <tr>
+            <td>{{$row->apellidos}} {{$row->nombres}}</td>
+            <td>{{$row->email}}</td>
+            <td>
+            	<?php
+            		$echo ='';
+            		foreach(\App\Helpers::getTipousuarioUsuario($row->idusuario) as $tipo){
+            			$echo.= $tipo->nombretipo . '&nbsp;&nbsp;&nbsp;';
+            		}
+            		echo (rtrim($echo,'&nbsp;&nbsp;&nbsp;'));
+            	?>
+            </td>
+            <td>{{$row->estado}}</td>
+            <td>{!!link_to_route('usuario.edit',$title= "Editar", $parameters = $row->idusuario, $attributes = ["class"=>'btn btn-primary  '])!!}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
+{!!$usuario->render()!!}
+@stop

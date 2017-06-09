@@ -1,0 +1,9 @@
+{!!Form::hidden("fecha",date("Y-m-d"))!!}
+{!!Form::hidden("numerohoras","1")!!}
+{!!Form::hidden("estado","activo")!!}
+{!!Form::hidden("anioescolar_idanioescolar",\App\Helpers::getParametros()['idanioescolar'])!!}
+{!!Form::hidden("periodo_idperiodo",\App\Helpers::getParametros()['idperiodo'])!!}
+{!!Form::hidden("curso_idcurso",$profesorcursomateria->curso_idcurso)!!}
+{!!Form::hidden("materia_idmateria",$profesorcursomateria->materia_idmateria)!!}
+{!!Form::hidden("alumno_idalumno",$alumno->alumno_idalumno)!!}
+{!!Form::hidden("profesor_curso_idprofesor_curso",$profesor_curso->idprofesor_curso)!!}
