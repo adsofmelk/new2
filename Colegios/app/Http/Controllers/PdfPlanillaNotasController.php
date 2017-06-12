@@ -131,16 +131,27 @@ class PdfPlanillaNotasController extends PdfTemplateLanscapeLetterController
 		
 		$this->pdf::setX($this->pdf::getX()+1); //ESPACION EN BLANCO
 		
-		$this->pdf::Cell(10, $h,(isset($row['cognitivo'])?$row['cognitivo']:''),1 , 0, "L",1); //COGMITIGO
-		$this->pdf::Cell(10, $h,(isset($row['procedimental'])?$row['procedimental']:''),1 , 0, "L",1); //PROCEDIMENTAL
-		$this->pdf::Cell(10, $h,(isset($row['actitudinal'])?$row['actitudinal']:''),1 , 0, "L",1); //ACTITUDINAL
+		
+		
+		
+		$this->pdf::Cell(10, $h,(sizeof($row['DF Cognitivo'])>0?number_format($row['DF Cognitivo'][0]->promedio,2):''),1 , 0, "L",1); //COGMITIGO
+		
+		$this->pdf::Cell(10, $h,(sizeof($row['DF Procedimental'])>0?number_format($row['DF Procedimental'][0]->promedio,2):''),1 , 0, "L",1); //PROCEDIMENTAL
+		
+		$this->pdf::Cell(10, $h,(sizeof($row['DF Actitudinal'])>0?number_format($row['DF Actitudinal'][0]->promedio,2):''),1 , 0, "L",1); //ACTITUDINAL
+		
 		
 		$this->pdf::setX($this->pdf::getX()+2); //DOBLE ESPACION EN BLANCO
 		
-		$this->pdf::Cell(10, $h,(isset($row['preparatorio'])?$row['preparatorio']:''),1 , 0, "L"); //PREPARATORIO
-		$this->pdf::Cell(10, $h,(isset($row['finalasignatura'])?$row['finalasignatura']:''),1 , 0, "L"); //FINAL ASIGNATURA
-		//$this->pdf::Cell(10, $h,(isset($row['examen4p'])?$row['examen4p']:''),1 , 0, "L"); //EXAMEN 4P
-		$this->pdf::Cell(10, $h,(isset($row['examenfinal'])?$row['examenfinal']:''),1 , 0, "L"); //EXAMEN FINAL
+		$this->pdf::Cell(10, $h,(sizeof($row['Preparatorio'])>0?number_format($row['Preparatorio'][0]->promedio,2):''),1 , 0, "L"); //PREPARATORIO
+		
+		$this->pdf::Cell(10, $h,(sizeof($row['Examen Asignatura'])>0?number_format($row['Examen Asignatura'][0]->promedio,2):''),1 , 0, "L"); //FINAL ASIGNATURA
+		
+		if(sizeof($row['Examen 4° Periodo'])>0){
+			$this->pdf::Cell(10, $h,number_format($row['Examen 4° Periodo'][0]->promedio,2),1 , 0, "L"); //EXAMEN 4P
+		}
+		
+		$this->pdf::Cell(10, $h,(sizeof($row['Examen Final'])>0?number_format($row['Examen Final'][0]->promedio,2):''),1 , 0, "L"); //EXAMEN FINAL
 		
 		$this->pdf::setX($this->pdf::getX()+2); //DOBLE ESPACION EN BLANCO
 		

@@ -164,5 +164,10 @@ class Helpers {
     	}
     	return false;
     }
+    
+    public static function cursoToGrado($idcurso){
+    	$curso = \App\CursoModel::find($idcurso);
+    	return $curso->grado_idgrado;
+    }
 
 }

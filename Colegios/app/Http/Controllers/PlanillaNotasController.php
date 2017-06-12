@@ -107,6 +107,14 @@ class PlanillaNotasController extends Controller
     															])->get();
     	$periodos = \App\PeriodoModel::where(['anioescolar_idanioescolar'=>\App\Helpers::getParametros()['idanioescolar']])->get();
     	
+    	$tipoestandar = \App\TipoEstandarModel::where([
+    			'anioescolar_idanioescolar'=>\App\Helpers::getParametros()['idanioescolar'],
+    			'estado'=>true,
+    			'periodo_idperiodo'=>\App\Helpers::getParametros()['idperiodo'],
+    			'grado_idgrado'=>\App\Helpers::cursoToGrado($profesor_curso->curso_idcurso)
+    	])->get();
+    	
+    	
 		foreach($datos['alumnos'] as $key=>$val){
 			$tempnotas = array();
 			for($i = 0; $i<sizeof($periodos); $i++){
@@ -124,7 +132,18 @@ class PlanillaNotasController extends Controller
 				}
 			}
 			
+			$datos['estandares']=array();
 			
+			foreach($tipoestandar as $tipokey=>$tipoval){
+				$datos['alumnos'][$key][$tipoval->nombre]= DB::select('call getPromedioEstandar(?,?,?,?,?,?)',[
+																					$datos['alumnos'][$key]['alumno_idalumno'],
+																					$tipoval->idtipoestandar,
+																					$profesor_curso->curso_idcurso,
+																					\App\Helpers::getParametros()['idperiodo'],
+																					\App\Helpers::getParametros()['idanioescolar'],
+																					$profesor_curso->materia_idmateria
+								]);
+			}
 			
 			
 			
