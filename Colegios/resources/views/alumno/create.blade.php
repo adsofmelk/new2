@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3>Nuevo Alumno </h3>
+<h3>Nuevo Estudiante</h3>
 
 <p>&nbsp;</p>
 
@@ -10,7 +10,7 @@
     
     @include('alumno.forms.alumnoforms')
     
-    {!!Form::submit("Guardar",["class"=>"btn btn-primary","id"=>"btn-save"])!!}
+    {!!Form::submit("Guardar",["class"=>"btn btn-primary","id"=>"btn-save",'files'=>true])!!}
 {!!Form::close()!!}
 
 {!!Html::script('app/js/ModAlumno.js')!!}    

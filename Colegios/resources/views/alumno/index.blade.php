@@ -34,7 +34,7 @@
       		<tr>
       			<td>{{ $alumno->apellidos . '  ' .$alumno->nombres }}</td>
       			<td>
-      				<button type="button" class="btn btn-info btn-xs" data-id="{{$alumno->apellidos}}" data-toggle="modal" data-target="#myModal">Ver+</button>
+      				{!!link_to_route('alumno.show',$title= "Ver +", $parameters = $alumno->alumno_idalumno, $attributes = ["class"=>'btn btn-sm btn-primary'])!!}
       			</td>
       		</tr>
       		@endforeach

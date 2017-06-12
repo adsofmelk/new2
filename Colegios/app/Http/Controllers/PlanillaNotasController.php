@@ -123,6 +123,11 @@ class PlanillaNotasController extends Controller
 					$tempnotas[] = $datos['alumnos'][$key]['notas'.($i+1).'p'][0]->nota;
 				}
 			}
+			
+			
+			
+			
+			
 			$datos['alumnos'][$key]['notasacar'] = (sizeof($tempnotas)>0)?number_format(\App\Helpers::getParametros()['notaaprovatoria'] + (\App\Helpers::getParametros()['notaaprovatoria']*sizeof($tempnotas))-(array_sum($tempnotas)),2):'';
 			$datos['alumnos'][$key]['nf']=(sizeof($tempnotas)>0)?number_format((array_sum($tempnotas)/sizeof($tempnotas)),2):'';
 			unset($tempnotas);
