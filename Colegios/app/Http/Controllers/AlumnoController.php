@@ -21,6 +21,8 @@ class AlumnoController extends Controller
     	foreach ($cursos as $key=>$val){
     		$cursos[$key]['alumnos'] = \App\ViewAlumnosCursoModel::where([
     						'curso_idcurso'=>$val->idcurso,
+    						'estadoalumno'=>'activo',
+    						'estado'=>'activo',
     						])->orderBy('codigolista',"ASC")
     						->get();
     	}

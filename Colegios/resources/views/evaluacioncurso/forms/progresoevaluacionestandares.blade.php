@@ -20,4 +20,8 @@
 		<h4>Porcentaje de Estandares Evaluados: </h4>
 		<h4>{{number_format(($i/sizeof($estandares))*100,2)}} %</h4>
 	</div>
+	<div class='col-sm-12'>
+		{{link_to_route('planillanotas.show',$title= "VER PLANILLA DE NOTAS", $parameters = $profesor_curso->idprofesor_curso, $attributes = ["class"=>'btn btn-primary','target'=>'_blank'])}}
+	</div>
 </div>
+

@@ -88,7 +88,7 @@
 						      	
 						      		<div class='col-sm-12' style='padding:9px; border: 1px solid #eee;'>
 						 				<div class='col-sm-12'>
-						 					<strong>{{$alumno->nombres . " " .$alumno->apellidos}}</strong>
+						 					<strong>[{{$alumno->alumno_idalumno}}] {{$alumno->nombres . " " .$alumno->apellidos}}</strong>
 						 				</div>
 						 				@foreach($alumno['acudientes'] as $acudiente)
 						 				<div class='col-sm-6' style='border: 1px solid #eee; padding:8px;'>

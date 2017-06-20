@@ -294,7 +294,7 @@ class UsuarioController extends Controller
         $usuario_persona = \App\UsuarioPersonaModel::where([
         			'usuario_idusuario'=>$usuario->idusuario
         		])->first();
-        if($usuario_persona){
+        if(sizeof($usuario_persona)>0){
         	$persona = \App\PersonaModel::find($usuario_persona->persona_idpersona);
         }else{
         	$persona = null;

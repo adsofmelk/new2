@@ -53,8 +53,8 @@
 	<?php $i++;?>	
 	
 		<div class="row panel panel-body">
-		  <div class="col-sm-2" style='background:#eee; height:200px;'>
-			  foto alumno
+		  <div class="col-sm-2" style='background:""; height:200px;'>
+			  <img src="/images/alumnos/default.png" class="img-thumbnail" alt="{{$alumno->nombres . " " . $alumno->apellidos}}" style="width:100%;">
 		  </div>
 		  <div class="col-sm-10 panel-body">
 		  	<div class="row">
@@ -63,7 +63,13 @@
 		  		</div>
 		  		 <div class="col-sm-6 ">
 				  	
-				  	<h4><strong>Edad: </strong>{{date('Y-m-d') - $alumno->fechanacimiento}} Años</h4>
+				  	<h4><strong>Edad: </strong>
+				  	<?php 
+				  	$datetime1 = date_create($alumno->fechanacimiento);
+				  	$datetime2 = date_create(date('Y-m-d'));
+				  	$interval = date_diff($datetime1, $datetime2);
+				  	echo $interval->format('%y años');
+				  	?></h4>
 				  	<h4><strong>Fecha de nacimiento (año-mes-día): </strong>{{$alumno->fechanacimiento}}</h4>
 				  	<h4><strong>Estado: </strong>{{$alumno->estadoalumno}}</h4>
 				  </div>

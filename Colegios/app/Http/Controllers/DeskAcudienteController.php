@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 
 class DeskAcudienteController extends Controller
 {
@@ -58,6 +59,16 @@ class DeskAcudienteController extends Controller
         		->where('fechaevaluacion','>',date('Y-m-d'))
         		->get();
         		
+        		
+        		//ACUMULADO TOTAL DE FALLAS
+        		$alumnos[$key]['acumuladofallas'] = \App\ViewAcumuladoFallasModel::select(DB::raw('sum(cantidad) as cantidad'))->where([
+        				'alumno_idalumno'=>$val->alumno_idalumno,
+        				'curso_idcurso'=>$val->curso_idcurso,
+        				'periodo_idperiodo'=>\App\Helpers::getParametros()['idperiodo'],
+        				'anioescolar_idanioescolar'=>\App\Helpers::getParametros()['idanioescolar'],
+        		])->first();
+        		
+        		
         		///LISTADO DE MATERIAS
         		$alumnos[$key]['materias'] = \App\ViewProfesorCursoMateriaModel::where([
         				'curso_idcurso'=>$val->curso_idcurso,
@@ -72,6 +83,23 @@ class DeskAcudienteController extends Controller
         					'periodo_idperiodo'=>\App\Helpers::getParametros()['idperiodo'],
         					'anioescolar_idanioescolar'=>\App\Helpers::getParametros()['idanioescolar'],
         					
+        			])->get();
+        			
+        			$alumnos[$key]['materias'][$llave]['acumuladofallas'] = \App\ViewAcumuladoFallasModel::where([
+        					'anioescolar_idanioescolar'=>\App\Helpers::getParametros()['idanioescolar'],
+        					'periodo_idperiodo'=>\App\Helpers::getParametros()['idperiodo'],
+        					'curso_idcurso'=>$val->curso_idcurso,
+        					'materia_idmateria'=>$valor->materia_idmateria,
+        					'alumno_idalumno'=>$val->alumno_idalumno,
+        			])->first();
+        			
+        			$alumnos[$key]['materias'][$llave]['fallas'] = \App\FallasModel::where([
+        					'anioescolar_idanioescolar'=>\App\Helpers::getParametros()['idanioescolar'],
+        					'periodo_idperiodo'=>\App\Helpers::getParametros()['idperiodo'],
+        					'curso_idcurso'=>$val->curso_idcurso,
+        					'materia_idmateria'=>$valor->materia_idmateria,
+        					'alumno_idalumno'=>$val->alumno_idalumno,
+        					'estado'=>'activo',
         			])->get();
         		}
                         
